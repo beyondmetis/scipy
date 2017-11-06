@@ -46,7 +46,7 @@ c=============================================================================
       logical          lsave(4)
       integer          n, m, iprint, maxls,
      +                 nbd(n), iwa(3*n), isave(44)
-      double precision f, factr, pgtol, x(n), l(n), u(n), g(n),
+      real f, factr, pgtol, x(n), l(n), u(n), g(n),
 c
 c-jlm-jn
      +                 wa(2*m*n + 5*n + 11*m*m + 8*m), dsave(29)
@@ -288,7 +288,7 @@ c======================= The end of setulb =============================
       integer          n, m, iprint, nbd(n), index(n),
      +                 iwhere(n), indx2(n), isave(23),
      +                 maxls
-      double precision f, factr, pgtol,
+      real f, factr, pgtol,
      +                 x(n), l(n), u(n), g(n), z(n), r(n), d(n), t(n), 
 c-jlm-jn
      +                 xp(n), 
@@ -481,12 +481,12 @@ c     ************
      +                 head,col,iter,itail,iupdat,
      +                 nseg,nfgv,info,ifun,
      +                 iword,nfree,nact,ileave,nenter
-      double precision theta,fold,ddot,dr,rr,tol,
+      real theta,fold,ddot,dr,rr,tol,
      +                 xstep,sbgnrm,ddum,dnorm,dtd,epsmch,
      +                 cpu1,cpu2,cachyt,sbtime,lnscht,time1,time2,
      +                 gd,gdold,stp,stpmx,time
-      double precision one,zero
-      double precision dlamch
+      real one,zero
+      real dlamch
       external         dlamch
       parameter        (one=1.0d0,zero=0.0d0)
       
@@ -993,7 +993,7 @@ c======================= The end of mainlb =============================
 
       logical          prjctd, cnstnd, boxed
       integer          n, iprint, nbd(n), iwhere(n)
-      double precision x(n), l(n), u(n)
+      real x(n), l(n), u(n)
 
 c     ************
 c
@@ -1023,7 +1023,7 @@ c
 c     ************
 
       integer          nbdd,i
-      double precision zero
+      real zero
       parameter        (zero=0.0d0)
 
 c     Initialize nbdd, prjctd, cnstnd and boxed.
@@ -1093,7 +1093,7 @@ c======================= The end of active =============================
       subroutine bmv(m, sy, wt, col, v, p, info)
 
       integer m, col, info
-      double precision sy(m, m), wt(m, m), v(2*col), p(2*col)
+      real sy(m, m), wt(m, m), v(2*col), p(2*col)
 
 c     ************
 c
@@ -1154,7 +1154,7 @@ c
 c     ************
  
       integer          i,k,i2
-      double precision sum
+      real sum
  
       if (col .eq. 0) return
  
@@ -1212,7 +1212,7 @@ c======================== The end of bmv ===============================
       implicit none
       integer          n, m, head, col, nseg, iprint, info, 
      +                 nbd(n), iorder(n), iwhere(n)
-      double precision theta, epsmch,
+      real theta, epsmch,
      +                 x(n), l(n), u(n), g(n), t(n), d(n), xcp(n),
      +                 wy(n, col), ws(n, col), sy(m, m),
      +                 wt(m, m), p(2*m), c(2*m), wbp(2*m), v(2*m)
@@ -1396,10 +1396,10 @@ c     ************
       logical          xlower,xupper,bnded
       integer          i,j,col2,nfree,nbreak,pointr,
      +                 ibp,nleft,ibkmin,iter
-      double precision f1,f2,dt,dtm,tsum,dibp,zibp,dibp2,bkmin,
+      real f1,f2,dt,dtm,tsum,dibp,zibp,dibp2,bkmin,
      +                 tu,tl,wmc,wmp,wmw,ddot,tj,tj0,neggi,sbgnrm,
      +                 f2_org
-      double precision one,zero
+      real one,zero
       parameter        (one=1.0d0,zero=0.0d0)
  
 c     Check the status of the variables, reset iwhere(i) if necessary;
@@ -1708,7 +1708,7 @@ c====================== The end of cauchy ==============================
  
       logical          cnstnd
       integer          n, m, col, head, nfree, info, index(n)
-      double precision theta, 
+      real theta, 
      +                 x(n), g(n), z(n), r(n), wa(4*m), 
      +                 ws(n, m), wy(n, m), sy(m, m), wt(m, m)
 
@@ -1737,7 +1737,7 @@ c
 c     ************
  
       integer          i,j,k,pointr
-      double precision a1,a2
+      real a1,a2
 
       if (.not. cnstnd .and. col .gt. 0) then 
          do 26 i = 1, n
@@ -1775,7 +1775,7 @@ c======================= The end of cmprlb =============================
  
       character*60     task
       integer          n, m, info, k, nbd(n)
-      double precision factr, l(n), u(n)
+      real factr, l(n), u(n)
 
 c     ************
 c
@@ -1797,7 +1797,7 @@ c
 c     ************
 
       integer          i
-      double precision one,zero
+      real one,zero
       parameter        (one=1.0d0,zero=0.0d0)
 
 c     Check the input arguments for errors.
@@ -1837,7 +1837,7 @@ c======================= The end of errclb =============================
 
       integer          n, nsub, m, col, head, nenter, ileave, iupdat,
      +                 info, ind(n), indx2(n)
-      double precision theta, wn(2*m, 2*m), wn1(2*m, 2*m),
+      real theta, wn(2*m, 2*m), wn1(2*m, 2*m),
      +                 ws(n, m), wy(n, m), sy(m, m)
       logical          updatd
 
@@ -1966,8 +1966,8 @@ c     ************
 
       integer          m2,ipntr,jpntr,iy,is,jy,js,is1,js1,k1,i,k,
      +                 col2,pbegin,pend,dbegin,dend,upcl
-      double precision ddot,temp1,temp2,temp3,temp4
-      double precision one,zero
+      real ddot,temp1,temp2,temp3,temp4
+      real one,zero
       parameter        (one=1.0d0,zero=0.0d0)
 
 c     Form the lower triangular part of
@@ -2159,7 +2159,7 @@ c======================= The end of formk ==============================
       subroutine formt(m, wt, sy, ss, col, theta, info)
  
       integer          m, col, info
-      double precision theta, wt(m, m), sy(m, m), ss(m, m)
+      real theta, wt(m, m), sy(m, m), ss(m, m)
 
 c     ************
 c
@@ -2188,8 +2188,8 @@ c
 c     ************
 
       integer          i,j,k,k1
-      double precision ddum
-      double precision zero
+      real ddum
+      real zero
       parameter        (zero=0.0d0)
 
 
@@ -2326,7 +2326,7 @@ c======================= The end of freev ==============================
 
       subroutine hpsolb(n, t, iorder, iheap)
       integer          iheap, n, iorder(n)
-      double precision t(n)
+      real t(n)
   
 c     ************
 c
@@ -2371,7 +2371,7 @@ c
 c     ************
   
       integer          i,j,k,indxin,indxou
-      double precision ddum,out
+      real ddum,out
 
       if (iheap .eq. 0) then
 
@@ -2445,7 +2445,7 @@ c====================== The end of hpsolb ==============================
       logical          boxed, cnstnd
       integer          n, iter, ifun, iback, nfgv, info,
      +                 nbd(n), isave(2), iprint
-      double precision f, fold, gd, gdold, stp, dnorm, dtd, xstep,
+      real f, fold, gd, gdold, stp, dnorm, dtd, xstep,
      +                 stpmx, x(n), l(n), u(n), g(n), d(n), r(n), t(n),
      +                 z(n), dsave(13)
 c     **********
@@ -2476,10 +2476,10 @@ c
 c     **********
 
       integer          i
-      double           precision ddot,a1,a2
-      double precision one,zero,big
+      real ddot,a1,a2
+      real one,zero,big
       parameter        (one=1.0d0,zero=0.0d0,big=1.0d+10)
-      double precision ftol,gtol,xtol
+      real ftol,gtol,xtol
       parameter        (ftol=1.0d-3,gtol=0.9d0,xtol=0.1d0)
 
       if (task(1:5) .eq. 'FG_LN') goto 556
@@ -2573,7 +2573,7 @@ c======================= The end of lnsrlb =============================
      +                  iupdat, col, head, theta, rr, dr, stp, dtd)
  
       integer          n, m, itail, iupdat, col, head
-      double precision theta, rr, dr, stp, dtd, d(n), r(n), 
+      real theta, rr, dr, stp, dtd, d(n), r(n), 
      +                 ws(n, m), wy(n, m), sy(m, m), ss(m, m)
 
 c     ************
@@ -2601,8 +2601,8 @@ c
 c     ************
  
       integer          j,pointr
-      double precision ddot
-      double precision one
+      real ddot
+      real one
       parameter        (one=1.0d0)
 
 c     Set pointers for matrices WS and WY.
@@ -2659,7 +2659,7 @@ c======================= The end of matupd =============================
       subroutine prn1lb(n, m, l, u, x, iprint, epsmch)
  
       integer n, m, iprint
-      double precision epsmch, x(n), l(n), u(n)
+      real epsmch, x(n), l(n), u(n)
 
 c     ************
 c
@@ -2730,7 +2730,7 @@ c======================= The end of prn1lb =============================
       character*3      word
       integer          n, iprint, iter, nfgv, nact, nseg,
      +                 iword, iback
-      double precision f, sbgnrm, stp, xstep, x(n), g(n)
+      real f, sbgnrm, stp, xstep, x(n), g(n)
 
 c     ************
 c
@@ -2800,7 +2800,7 @@ c======================= The end of prn2lb =============================
       character*3      word
       integer          n, iprint, info, iter, nfgv, nintol,
      +                 nskip, nact, nseg, iback, k
-      double precision f, sbgnrm, time, stp, xstep, cachyt, sbtime,
+      real f, sbgnrm, time, stp, xstep, cachyt, sbtime,
      +                 lnscht, x(n)
 
 c     ************
@@ -2909,7 +2909,7 @@ c======================= The end of prn3lb =============================
       subroutine projgr(n, l, u, nbd, x, g, sbgnrm)
 
       integer          n, nbd(n)
-      double precision sbgnrm, x(n), l(n), u(n), g(n)
+      real sbgnrm, x(n), l(n), u(n), g(n)
 
 c     ************
 c
@@ -2932,8 +2932,8 @@ c
 c     ************
 
       integer i
-      double precision gi
-      double precision one,zero
+      real gi
+      real one,zero
       parameter        (one=1.0d0,zero=0.0d0)
 
       sbgnrm = zero
@@ -2961,7 +2961,7 @@ c======================= The end of projgr =============================
       implicit none
       integer          n, m, nsub, col, head, iword, iprint, info, 
      +                 ind(nsub), nbd(n)
-      double precision theta, 
+      real theta, 
      +                 l(n), u(n), x(n), d(n), xp(n), xx(n), gg(n),
      +                 ws(n, m), wy(n, m), 
      +                 wv(2*m), wn(2*m, 2*m)
@@ -3145,11 +3145,11 @@ c
 c     ************
 
       integer          pointr,m2,col2,ibd,jy,js,i,j,k
-      double precision alpha, xk, dk, temp1, temp2 
-      double precision one,zero
+      real alpha, xk, dk, temp1, temp2 
+      real one,zero
       parameter        (one=1.0d0,zero=0.0d0)
 c
-      double precision dd_p
+      real dd_p
 
       if (nsub .le. 0) return
       if (iprint .ge. 99) write (6,1001)
@@ -3316,8 +3316,8 @@ c====================== The end of subsm ===============================
      +                  task,isave,dsave)
       character*(*) task
       integer isave(2)
-      double precision f,g,stp,ftol,gtol,xtol,stpmin,stpmax
-      double precision dsave(13)
+      real f,g,stp,ftol,gtol,xtol,stpmin,stpmax
+      real dsave(13)
 c     **********
 c
 c     Subroutine dcsrch
@@ -3450,14 +3450,14 @@ c     Argonne National Laboratory and University of Minnesota.
 c     Brett M. Averick, Richard G. Carter, and Jorge J. More'. 
 c
 c     **********
-      double precision zero,p5,p66
+      real zero,p5,p66
       parameter(zero=0.0d0,p5=0.5d0,p66=0.66d0)
-      double precision xtrapl,xtrapu
+      real xtrapl,xtrapu
       parameter(xtrapl=1.1d0,xtrapu=4.0d0)
 
       logical brackt
       integer stage
-      double precision finit,ftest,fm,fx,fxm,fy,fym,ginit,gtest,
+      real finit,ftest,fm,fx,fxm,fy,fym,ginit,gtest,
      +       gm,gx,gxm,gy,gym,stx,sty,stmin,stmax,width,width1
 
 c     Initialization block.
@@ -3662,7 +3662,7 @@ c====================== The end of dcsrch ==============================
       subroutine dcstep(stx,fx,dx,sty,fy,dy,stp,fp,dp,brackt,
      +                  stpmin,stpmax)
       logical brackt
-      double precision stx,fx,dx,sty,fy,dy,stp,fp,dp,stpmin,stpmax
+      real stx,fx,dx,sty,fy,dy,stp,fp,dp,stpmin,stpmax
 c     **********
 c
 c     Subroutine dcstep
@@ -3755,10 +3755,10 @@ c     Argonne National Laboratory and University of Minnesota.
 c     Brett M. Averick and Jorge J. More'.
 c
 c     **********
-      double precision zero,p66,two,three
+      real zero,p66,two,three
       parameter(zero=0.0d0,p66=0.66d0,two=2.0d0,three=3.0d0)
    
-      double precision gamma,p,q,r,s,sgnd,stpc,stpf,stpq,theta
+      real gamma,p,q,r,s,sgnd,stpc,stpf,stpq,theta
 
       sgnd = dp*(dx/abs(dx))
 

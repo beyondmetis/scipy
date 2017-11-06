@@ -36,7 +36,7 @@ Functions
 from __future__ import division, print_function, absolute_import
 
 import numpy as np
-from numpy import array, asarray, float64, int32, zeros
+from numpy import array, asarray, float32, float64, int32, zeros
 from . import _lbfgsb
 from .optimize import (approx_fprime, MemoizeJac, OptimizeResult,
                        _check_unknown_options, wrap_function,
@@ -287,8 +287,8 @@ def _minimize_lbfgsb(fun, x0, args=(), jac=None, bounds=None,
             return f, g
 
     nbd = zeros(n, int32)
-    low_bnd = zeros(n, float64)
-    upper_bnd = zeros(n, float64)
+    low_bnd = zeros(n, float32)
+    upper_bnd = zeros(n, float32)
     bounds_map = {(None, None): 0,
                   (1, None): 1,
                   (1, 1): 2,
@@ -306,16 +306,16 @@ def _minimize_lbfgsb(fun, x0, args=(), jac=None, bounds=None,
     if not maxls > 0:
         raise ValueError('maxls must be positive.')
 
-    x = array(x0, float64)
-    f = array(0.0, float64)
-    g = zeros((n,), float64)
-    wa = zeros(2*m*n + 5*n + 11*m*m + 8*m, float64)
+    x = array(x0, float32)
+    f = array(0.0, float32)
+    g = zeros((n,), float32)
+    wa = zeros(2*m*n + 5*n + 11*m*m + 8*m, float32)
     iwa = zeros(3*n, int32)
     task = zeros(1, 'S60')
     csave = zeros(1, 'S60')
     lsave = zeros(4, int32)
     isave = zeros(44, int32)
-    dsave = zeros(29, float64)
+    dsave = zeros(29, float32)
 
     task[:] = 'START'
 
@@ -406,7 +406,7 @@ class LbfgsInvHessProduct(LinearOperator):
         n_corrs, n = sk.shape
 
         super(LbfgsInvHessProduct, self).__init__(
-            dtype=np.float64, shape=(n, n))
+            dtype=np.float32, shape=(n, n))
 
         self.sk = sk
         self.yk = yk
@@ -479,7 +479,7 @@ if __name__ == '__main__':
         return f
 
     def grad(x):
-        g = zeros(x.shape, float64)
+        g = zeros(x.shape, float32)
         t1 = x[1] - x[0] ** 2
         g[0] = 2 * (x[0] - 1) - 16 * x[0] * t1
         for i in range(1, g.shape[0] - 1):
@@ -508,7 +508,7 @@ if __name__ == '__main__':
     for i in range(1, n, 2):
         bounds[i] = (-100, 100)
 
-    x0 = zeros((n,), float64)
+    x0 = zeros((n,), float32)
     x0[:] = 3
 
     x, f, d = fmin_l_bfgs_b(func, x0, fprime=grad, m=m,

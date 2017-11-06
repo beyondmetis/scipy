@@ -1,7 +1,7 @@
 
       subroutine dpofa(a,lda,n,info)
       integer lda,n,info
-      double precision a(lda,*)
+      real a(lda,*)
 c
 c     dpofa factors a double precision symmetric positive definite
 c     matrix.
@@ -44,8 +44,8 @@ c     fortran sqrt
 c
 c     internal variables
 c
-      double precision ddot,t
-      double precision s
+      real ddot,t
+      real s
       integer j,jm1,k
 c     begin block with ...exits to 40
 c
@@ -76,7 +76,7 @@ c====================== The end of dpofa ===============================
 
       subroutine dtrsl(t,ldt,n,b,job,info)
       integer ldt,n,job,info
-      double precision t(ldt,*),b(*)
+      real t(ldt,*),b(*)
 c
 c
 c     dtrsl solves systems of the form
@@ -134,7 +134,7 @@ c     fortran mod
 c
 c     internal variables
 c
-      double precision ddot,temp
+      real ddot,temp
       integer case,j,jj
 c
 c     begin block permitting ...exits to 150
